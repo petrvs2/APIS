@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/apirest2.props" />
+</Project>
