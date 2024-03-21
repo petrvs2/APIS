@@ -41,11 +41,7 @@ namespace Repositories.Repositorio
             public PersonaModel ObtenerPorId(int Id)
             {
                 PersonaModel persona;
-                persona = new PersonaModel();
-                persona.Nombre = "fr";
-                persona.Edad = 23;
-                persona.Vive = true;
-                persona.Id = Id;
+                persona = Lista.Where(x=> x.Id == id).FirstOrDefault();
                 return persona;
             }
 

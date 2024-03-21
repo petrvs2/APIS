@@ -1,17 +1,16 @@
 //interfaz (vista) para interactuar con la aplicación
-using apirest2.Modelos;
-using apirest2.Repositorios;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments; //librería se manda a llamar
+using Repositories.Models;
+using Repositories.Repositorio;
 namespace apirest2.Controllers
 {
     [ApiController] //este va a ser el controlador principal
 
-    [Route("[controller]")] //se crea la ruta a apartir de la clase
-    public class ProductosControllers : ControllerBase
+    [Route("api/[controller]")] //se crea la ruta a apartir de la clase
+    public class ProductosController : ControllerBase
     { //: sirve para hacer herencia. Controller base hace toda 
         ProductoRepositorio productoRepositorio;
-        public ProductosControllers(ProductoRepositorio Repositorio)
+        public ProductosController(ProductoRepositorio Repositorio)
         {
             productoRepositorio = Repositorio;
         }
@@ -56,6 +55,19 @@ namespace apirest2.Controllers
             //productoRepositorio = new ProductoRepositorio();
             id = productoRepositorio.AgregarProducto(producto);
             return Created("", new { Id = id }); //creación de un objeto dinámico
+        }
+
+        [HttpPut ("{id}")]
+        public IActionResult ActualizarProducto(int id, ProductoModel producto){
+            
+            productoRepositorio.Actualizar(id, producto);
+            return NoContent();
+        }
+        
+        [HttpDelete ("{id}")]
+        public IActionResult BorrarProducto(int id){
+            productoRepositorio.Borrar(id);
+            return NoContent();
         }
     }
 }

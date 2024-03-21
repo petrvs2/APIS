@@ -1,4 +1,3 @@
-using apirest2.Repositorios;
 using Repositories.Repositorio;
 
 var builder = WebApplication.CreateBuilder(args);
